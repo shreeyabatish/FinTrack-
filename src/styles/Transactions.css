@@ -1,0 +1,288 @@
+.transactions-page {
+    padding: 32px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.transactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+}
+
+.page-label {
+    margin: 0 0 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #9ca3af;
+}
+
+.transactions-header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #111827;
+}
+
+.page-subtitle {
+    margin-top: 8px;
+    color: #6b7280;
+}
+
+.add-transaction-btn {
+    border: none;
+    background: #111827;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-transaction-btn:hover {
+    background: #1f2937;
+}
+
+.transaction-form-card,
+.transactions-card {
+    background: white;
+    border: 1px solid #e8ebf0;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.transaction-form-card h2,
+.transactions-card h2 {
+    margin-top: 0;
+    color: #111827;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.search-input {
+    padding: 12px 14px;
+    border: 1px solid #dfe3e8;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.search-input:focus {
+    border-color: #111827;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 11px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cancel-btn {
+    background: white;
+    border: 1px solid #dfe3e8;
+}
+
+.save-btn {
+    background: #111827;
+    color: white;
+    border: none;
+}
+
+.transaction-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.search-input {
+    width: 350px;
+    background: white;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-buttons button {
+    border: 1px solid #e5e7eb;
+    background: white;
+    padding: 10px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.filter-buttons .active-filter {
+    background: #111827;
+    color: white;
+}
+
+.transactions-card-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #edf0f3;
+    padding-bottom: 16px;
+    margin-bottom: 5px;
+}
+
+.transactions-card-header h2 {
+    margin-bottom: 5px;
+    font-size: 19px;
+}
+
+.transactions-card-header span {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.transaction-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 17px 5px;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.transaction-row:last-child {
+    border-bottom: none;
+}
+
+.transaction-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.transaction-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.transaction-title {
+    color: #111827;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.transaction-category {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.transaction-date {
+    color: #6b7280;
+    font-size: 13px;
+    min-width: 100px;
+}
+
+.transaction-amount {
+    min-width: 130px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.income-amount {
+    color: #16a34a;
+}
+
+.expense-amount {
+    color: #dc2626;
+}
+
+.delete-btn {
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    color: #dc2626;
+}
+
+.empty-transactions {
+    text-align: center;
+    padding: 55px 20px;
+}
+
+.empty-icon {
+    font-size: 35px;
+    color: #9ca3af;
+}
+
+.empty-transactions h3 {
+    color: #374151;
+}
+
+.empty-transactions p {
+    color: #9ca3af;
+}
+
+@media (max-width: 700px) {
+
+    .transactions-page {
+        padding: 20px;
+    }
+
+    .transactions-header,
+    .transaction-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input {
+        width: auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-date {
+        display: none;
+    }
+
+    .transaction-amount {
+        min-width: auto;
+    }
+}

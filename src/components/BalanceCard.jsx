@@ -1,8 +1,9 @@
-function BalanceCard({ amount, change }) {
+function BalanceCard({ amount = "₹0", change = "0%" }) {
     return (
         <div className="financial-card balance-card">
 
             <div className="card-top">
+
                 <div>
                     <p className="card-label">TOTAL BALANCE</p>
                     <h2>{amount}</h2>
@@ -11,9 +12,11 @@ function BalanceCard({ amount, change }) {
                 <div className="card-icon balance-icon">
                     ₹
                 </div>
+
             </div>
 
             <div className="card-bottom">
+
                 <span className="change positive">
                     ↑ {change}
                 </span>
@@ -21,6 +24,7 @@ function BalanceCard({ amount, change }) {
                 <span className="change-text">
                     vs last month
                 </span>
+
             </div>
 
         </div>

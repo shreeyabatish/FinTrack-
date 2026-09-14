@@ -1,0 +1,404 @@
+/* ================================
+   SETTINGS PAGE
+================================ */
+
+.settings-page {
+    padding: 32px 36px 50px;
+    min-height: 100%;
+    box-sizing: border-box;
+    background: #f8faf9;
+    transition: 0.3s ease;
+}
+
+
+/* Header */
+
+.settings-header {
+    margin-bottom: 32px;
+}
+
+.settings-label {
+    margin: 0 0 8px;
+
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.settings-header h1 {
+    margin: 0;
+
+    color: #111827;
+    font-size: 34px;
+    letter-spacing: -1px;
+}
+
+.settings-header p:last-child {
+    margin: 8px 0 0;
+
+    color: #8b929d;
+    font-size: 14px;
+}
+
+
+/* Sections */
+
+.settings-section {
+    max-width: 900px;
+    margin-bottom: 28px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+.section-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+    background: #eef5f1;
+
+    font-size: 17px;
+}
+
+.section-heading h2 {
+    margin: 0 0 3px;
+
+    color: #111827;
+    font-size: 16px;
+}
+
+.section-heading p {
+    margin: 0;
+
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Cards */
+
+.settings-card {
+    background: white;
+
+    border: 1px solid #e8ebf0;
+    border-radius: 16px;
+
+    padding: 6px 20px;
+
+    box-shadow: 0 3px 12px rgba(17, 24, 39, 0.025);
+}
+
+
+/* Profile */
+
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 18px 0;
+}
+
+.settings-avatar {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #111827;
+    color: white;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.profile-row > div:nth-child(2) {
+    flex: 1;
+}
+
+.profile-row strong {
+    display: block;
+
+    color: #111827;
+    font-size: 14px;
+}
+
+.profile-row span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Setting rows */
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 19px 0;
+
+    border-bottom: 1px solid #f0f1f3;
+}
+
+.setting-row:last-child {
+    border-bottom: none;
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.setting-info strong {
+    color: #111827;
+    font-size: 13px;
+}
+
+.setting-info span {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Select */
+
+.setting-row select {
+    min-width: 190px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #e2e5e9;
+    border-radius: 9px;
+
+    background: white;
+    color: #374151;
+
+    font-size: 12px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.setting-row select:focus {
+    border-color: #6fae8c;
+}
+
+
+/* Toggle */
+
+.toggle {
+    position: relative;
+
+    width: 44px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 20px;
+
+    background: #d1d5db;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.toggle span {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    top: 3px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+    transition: 0.25s ease;
+}
+
+.toggle.active {
+    background: #2e7d5b;
+}
+
+.toggle.active span {
+    transform: translateX(20px);
+}
+
+
+/* Buttons */
+
+.outline-btn {
+    padding: 9px 14px;
+
+    border: 1px solid #e1e5e9;
+    border-radius: 9px;
+
+    background: white;
+    color: #374151;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.outline-btn:hover {
+    background: #f8faf9;
+}
+
+
+/* Bottom actions */
+
+.settings-actions {
+    max-width: 900px;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    padding-top: 4px;
+}
+
+.reset-btn,
+.save-btn {
+    padding: 11px 17px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.reset-btn {
+    border: 1px solid #e1e5e9;
+
+    background: white;
+    color: #6b7280;
+}
+
+.save-btn {
+    border: none;
+
+    background: #111827;
+    color: white;
+
+    min-width: 125px;
+}
+
+.save-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   DARK MODE
+================================ */
+
+.settings-dark {
+    background: #111827;
+}
+
+.settings-dark .settings-header h1,
+.settings-dark .section-heading h2,
+.settings-dark .setting-info strong,
+.settings-dark .profile-row strong {
+    color: white;
+}
+
+.settings-dark .settings-header p:last-child,
+.settings-dark .section-heading p,
+.settings-dark .setting-info span,
+.settings-dark .profile-row span {
+    color: #9ca3af;
+}
+
+.settings-dark .settings-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.settings-dark .setting-row {
+    border-color: #374151;
+}
+
+.settings-dark .setting-row select {
+    background: #111827;
+    color: white;
+    border-color: #374151;
+}
+
+.settings-dark .outline-btn,
+.settings-dark .reset-btn {
+    background: #1f2937;
+    color: #d1d5db;
+    border-color: #374151;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .settings-page {
+        padding: 24px 18px 40px;
+    }
+
+    .settings-header h1 {
+        font-size: 28px;
+    }
+
+    .setting-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .setting-row select {
+        width: 100%;
+    }
+
+    .profile-row .outline-btn {
+        display: none;
+    }
+
+    .settings-actions {
+        flex-direction: column-reverse;
+    }
+
+    .reset-btn,
+    .save-btn {
+        width: 100%;
+    }
+}

@@ -1,39 +1,61 @@
-import React from "react";
-
 function GoalCard({ goalName, saved, target }) {
-  const percent = Math.round((saved / target) * 100);
-  const remaining = target - saved;
+    const percent = Math.min(
+        100,
+        Math.round((Number(saved) / Number(target)) * 100)
+    );
 
-  // Dynamic color based on progress
-  let barColor = "blue";
-  if (percent >= 100) {
-    barColor = "green";
-  } else if (percent >= 70) {
-    barColor = "orange";
-  }
+    const remaining = Math.max(
+        0,
+        Number(target) - Number(saved)
+    );
 
-  return (
-    <div className="goal-card">
-      <h3>{goalName}</h3>
-      <p>₹{saved} / ₹{target}</p>
-      <div style={{ background: "#ddd", width: "100%", height: "10px" }}>
-        <div
-          style={{
-            background: barColor,
-            width: `${percent}%`,
-            height: "10px",
-            transition: "width 0.3s ease" // 👈 added smooth animation
-          }}
-        ></div>
-      </div>
-      <p>{percent}%</p>
-      {remaining > 0 ? (
-        <p>₹{remaining} remaining</p>
-      ) : (
-        <p style={{ color: "green" }}>Goal achieved!</p>
-      )}
-    </div>
-  );
+    const achieved = percent >= 100;
+
+    return (
+        <div className="goal-card">
+
+            <div className="goal-card-top">
+                <div className="goal-icon">
+                    🎯
+                </div>
+
+                <div className="goal-status">
+                    {achieved ? "Completed" : `${percent}%`}
+                </div>
+            </div>
+
+            <div className="goal-info">
+                <h3>{goalName}</h3>
+
+                <p>
+                    ₹{Number(saved).toLocaleString("en-IN")}
+                    <span>
+                        {" "}of ₹{Number(target).toLocaleString("en-IN")}
+                    </span>
+                </p>
+            </div>
+
+            <div className="goal-progress">
+                <div
+                    className={`goal-progress-fill ${
+                        achieved ? "completed" : ""
+                    }`}
+                    style={{ width: `${percent}%` }}
+                ></div>
+            </div>
+
+            <div className="goal-bottom">
+                <span>
+                    {achieved
+                        ? "🎉 Goal achieved!"
+                        : `₹${remaining.toLocaleString("en-IN")} remaining`}
+                </span>
+
+                <strong>{percent}%</strong>
+            </div>
+
+        </div>
+    );
 }
 
 export default GoalCard;

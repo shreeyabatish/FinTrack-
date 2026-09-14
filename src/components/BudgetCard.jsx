@@ -1,33 +1,78 @@
-import React from "react";
-
 function BudgetCard({ category, spent, budget }) {
-  const percent = Math.round((spent / budget) * 100);
+    const percent = budget > 0
+        ? Math.round((spent / budget) * 100)
+        : 0;
 
-  // Dynamic color based on spending percentage
-  let barColor = "green";
-  if (percent >= 90) {
-    barColor = "red";
-  } else if (percent >= 70) {
-    barColor = "orange";
-  }
+    const remaining = budget - spent;
 
-  return (
-    <div>
-      <h3>{category}</h3>
-      <p>₹{spent} / ₹{budget}</p>
-      <div style={{ background: "#ddd", width: "100%", height: "10px" }}>
-        <div
-          style={{
-            background: barColor,
-            width: `${percent}%`,
-            height: "10px",
-            transition: "width 0.3s ease" // 👈 added smooth animation
-          }}
-        ></div>
-      </div>
-      <p>{percent}%</p>
-    </div>
-  );
+    let status = "On track";
+    let statusClass = "good";
+
+    if (percent >= 100) {
+        status = "Over budget";
+        statusClass = "danger";
+    } else if (percent >= 80) {
+        status = "Almost there";
+        statusClass = "warning";
+    }
+
+    const displayPercent = Math.min(percent, 100);
+
+    return (
+        <div className="budget-card">
+
+            <div className="budget-card-header">
+                <div className="budget-category">
+                    <div className="budget-icon">
+                        {category === "Food" && "🍽️"}
+                        {category === "Travel" && "✈️"}
+                        {category === "Shopping" && "🛍️"}
+                        {!["Food", "Travel", "Shopping"].includes(category) && "💰"}
+                    </div>
+
+                    <div>
+                        <h3>{category}</h3>
+                        <span>Monthly budget</span>
+                    </div>
+                </div>
+
+                <span className={`budget-status ${statusClass}`}>
+                    {status}
+                </span>
+            </div>
+
+            <div className="budget-amount">
+                <div>
+                    <span className="spent-label">Spent</span>
+                    <strong>₹{spent.toLocaleString("en-IN")}</strong>
+                </div>
+
+                <div className="budget-total">
+                    <span>of</span>
+                    <strong>₹{budget.toLocaleString("en-IN")}</strong>
+                </div>
+            </div>
+
+            <div className="budget-progress">
+                <div
+                    className={`budget-progress-fill ${statusClass}`}
+                    style={{ width: `${displayPercent}%` }}
+                />
+            </div>
+
+            <div className="budget-footer">
+                <span>{percent}% used</span>
+
+                <span className={remaining < 0 ? "over-budget" : ""}>
+                    {remaining >= 0
+                        ? `₹${remaining.toLocaleString("en-IN")} remaining`
+                        : `₹${Math.abs(remaining).toLocaleString("en-IN")} over`
+                    }
+                </span>
+            </div>
+
+        </div>
+    );
 }
 
 export default BudgetCard;
