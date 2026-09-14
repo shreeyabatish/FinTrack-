@@ -1,40 +1,126 @@
 import { useState } from "react";
+import TransactionForm from "./TransactionForm";
 
 function Transactions() {
 
-  const [transactions] = useState([
+  const [transactions, setTransactions] = useState([
     {
       id: 1,
       name: "Food",
       amount: 500,
-      type: "Expense"
+      type: "Expense",
+      date: "",
+      description: ""
     },
     {
       id: 2,
       name: "Travel",
       amount: 300,
-      type: "Expense"
+      type: "Expense",
+      date: "",
+      description: ""
     },
     {
       id: 3,
       name: "Salary",
       amount: 50000,
-      type: "Income"
+      type: "Income",
+      date: "",
+      description: ""
     },
     {
       id: 4,
       name: "Shopping",
       amount: 800,
-      type: "Expense"
+      type: "Expense",
+      date: "",
+      description: ""
     }
   ]);
+
+  // Form show/hide
+  const [showForm, setShowForm] = useState(false);
+
+  // Search
+  const [search, setSearch] = useState("");
+
+  // Filter
+  const [filter, setFilter] = useState("All");
+
+  // Add new transaction
+  const handleAddTransaction = (newTransaction) => {
+
+    const transaction = {
+      ...newTransaction,
+      id: Date.now()
+    };
+
+    setTransactions([...transactions, transaction]);
+
+    // Form close after adding
+    setShowForm(false);
+  };
+
+  // Search + Filter
+  const filteredTransactions = transactions.filter((transaction) => {
+
+    const searchText = search.toLowerCase();
+
+    const matchesSearch =
+      transaction.name.toLowerCase().includes(searchText) ||
+      transaction.description.toLowerCase().includes(searchText);
+
+    const matchesFilter =
+      filter === "All" || transaction.type === filter;
+
+    return matchesSearch && matchesFilter;
+  });
 
   return (
     <div>
 
       <h1>Transactions</h1>
 
-      {transactions.map((transaction) => (
+      {/* Search */}
+      <input
+        type="text"
+        placeholder="Search transactions..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      {/* Filters */}
+      <div>
+
+        <button onClick={() => setFilter("All")}>
+          All
+        </button>
+
+        <button onClick={() => setFilter("Income")}>
+          Income
+        </button>
+
+        <button onClick={() => setFilter("Expense")}>
+          Expense
+        </button>
+
+      </div>
+
+      {/* Add Transaction */}
+      <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "Close" : "+ Add Transaction"}
+      </button>
+
+      {/* Transaction Form */}
+      {showForm && (
+        <TransactionForm
+          onAddTransaction={handleAddTransaction}
+        />
+      )}
+
+      {/* Transaction List */}
+      {filteredTransactions.map((transaction) => (
+
         <div key={transaction.id}>
 
           <h3>{transaction.name}</h3>
@@ -44,10 +130,26 @@ function Transactions() {
             ₹{transaction.amount}
           </p>
 
-          <p>{transaction.type}</p>
+          <p>Type: {transaction.type}</p>
+
+          {transaction.date && (
+            <p>Date: {transaction.date}</p>
+          )}
+
+          {transaction.description && (
+            <p>
+              Description: {transaction.description}
+            </p>
+          )}
 
         </div>
+
       ))}
+
+      {/* No result message */}
+      {filteredTransactions.length === 0 && (
+        <p>No transactions found.</p>
+      )}
 
     </div>
   );

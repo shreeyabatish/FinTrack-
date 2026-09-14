@@ -1,154 +1,119 @@
 import { useState } from "react";
-import TransactionForm from "./TransactionForm";
 
-function Transactions() {
+function TransactionForm({ onAddTransaction }) {
 
-  // Transactions data
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      name: "Food",
-      amount: 500,
-      type: "Expense"
-    },
-    {
-      id: 2,
-      name: "Travel",
-      amount: 300,
-      type: "Expense"
-    },
-    {
-      id: 3,
-      name: "Salary",
-      amount: 50000,
-      type: "Income"
-    },
-    {
-      id: 4,
-      name: "Shopping",
-      amount: 800,
-      type: "Expense"
+  const [amount, setAmount] = useState("");
+  const [type, setType] = useState("Expense");
+  const [category, setCategory] = useState("Food");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+
+    // Validation
+    if (!amount || !date || !description) {
+      alert("Please fill all the fields");
+      return;
     }
-  ]);
 
-  // Search state
-  const [search, setSearch] = useState("");
+    const newTransaction = {
+      name: category,
+      amount: Number(amount),
+      type: type,
+      category: category,
+      date: date,
+      description: description
+    };
 
-  // Filter state
-  const [filter, setFilter] = useState("All");
+    // Send transaction to parent component
+    onAddTransaction(newTransaction);
 
-  // Form visibility
-  const [showForm, setShowForm] = useState(false);
-
-
-  // Search + Filter
-  const filteredTransactions = transactions.filter((transaction) => {
-
-    const matchesSearch = transaction.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
-
-    const matchesFilter =
-      filter === "All" || transaction.type === filter;
-
-    return matchesSearch && matchesFilter;
-  });
-
-
-  // Add new transaction
-  const addTransaction = (newTransaction) => {
-
-    setTransactions((prevTransactions) => [
-      ...prevTransactions,
-      {
-        ...newTransaction,
-        id: Date.now()
-      }
-    ]);
-
-    setShowForm(false);
+    // Reset form
+    setAmount("");
+    setType("Expense");
+    setCategory("Food");
+    setDate("");
+    setDescription("");
   };
 
-
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
 
-      <h1>Transactions</h1>
+      <h2>Add Transaction</h2>
 
-
-      {/* Search */}
-      <input
-        type="text"
-        placeholder="Search transactions..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
-
-      {/* Filters */}
+      {/* Amount */}
       <div>
+        <label>Amount:</label>
 
-        <button onClick={() => setFilter("All")}>
-          All
-        </button>
-
-        <button onClick={() => setFilter("Income")}>
-          Income
-        </button>
-
-        <button onClick={() => setFilter("Expense")}>
-          Expense
-        </button>
-
+        <input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="₹"
+        />
       </div>
 
-
-      {/* Transaction List */}
+      {/* Type */}
       <div>
+        <label>Type:</label>
 
-        {filteredTransactions.map((transaction) => (
-
-          <div key={transaction.id}>
-
-            <h3>{transaction.name}</h3>
-
-            <p>
-              {transaction.type === "Income" ? "+" : "-"}
-              ₹{transaction.amount}
-            </p>
-
-            <p>{transaction.type}</p>
-
-            {transaction.date && (
-              <p>Date: {transaction.date}</p>
-            )}
-
-            {transaction.description && (
-              <p>Description: {transaction.description}</p>
-            )}
-
-          </div>
-
-        ))}
-
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="Expense">Expense</option>
+          <option value="Income">Income</option>
+        </select>
       </div>
 
+      {/* Category */}
+      <div>
+        <label>Category:</label>
 
-      {/* Add Transaction Button */}
-      <button onClick={() => setShowForm(!showForm)}>
-        + Add Transaction
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Salary">Salary</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      {/* Date */}
+      <div>
+        <label>Date:</label>
+
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </div>
+
+      {/* Description */}
+      <div>
+        <label>Description:</label>
+
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter description"
+        />
+      </div>
+
+      {/* Add button */}
+      <button type="submit">
+        ADD
       </button>
 
-
-      {/* Transaction Form */}
-      {showForm && (
-        <TransactionForm
-          onAddTransaction={addTransaction}
-        />
-      )}
-
-    </div>
+    </form>
   );
 }
 
-export default Transactions;
+export default TransactionForm;
