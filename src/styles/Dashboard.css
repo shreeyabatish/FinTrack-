@@ -1,0 +1,497 @@
+/* ================================
+   DASHBOARD LAYOUT
+================================ */
+
+.dashboard-layout {
+    min-height: 100vh;
+    display: flex;
+    background: #f6f8f7;
+    color: #18231f;
+}
+
+.main-area {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* ================================
+   MAIN CONTENT
+================================ */
+
+.dashboard-main {
+    padding: 32px 40px 50px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+
+/* ================================
+   WELCOME
+================================ */
+
+.dashboard-welcome {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.dashboard-eyebrow {
+    margin: 0 0 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    color: #648074;
+}
+
+.dashboard-welcome h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+}
+
+.dashboard-description {
+    margin: 8px 0 0;
+    color: #718079;
+    font-size: 14px;
+}
+
+.dashboard-date {
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid #e1e8e4;
+    border-radius: 10px;
+    color: #50615a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   BALANCE
+================================ */
+
+.balance-section {
+    min-height: 150px;
+    padding: 28px 32px;
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 16px;
+    background: #173c2d;
+    color: white;
+
+    box-shadow: 0 8px 24px rgba(23, 60, 45, 0.12);
+}
+
+.balance-section p {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    opacity: 0.7;
+}
+
+.balance-section h2 {
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: -1px;
+}
+
+.balance-section span {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.balance-symbol {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   SUMMARY CARDS
+================================ */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.summary-card {
+    padding: 21px 22px;
+    background: white;
+    border: 1px solid #e3e9e6;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(25, 45, 36, 0.04);
+}
+
+.summary-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.summary-top span {
+    color: #718079;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.summary-icon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+.income-icon {
+    background: #e7f5ed;
+    color: #268253;
+}
+
+.expense-icon {
+    background: #fcebea;
+    color: #bd5752;
+}
+
+.saving-icon {
+    background: #eef0f9;
+    color: #5c68a4;
+}
+
+.summary-card h3 {
+    margin: 17px 0 5px;
+    font-size: 25px;
+    letter-spacing: -0.5px;
+}
+
+.summary-card p {
+    margin: 0;
+    color: #8a9690;
+    font-size: 12px;
+}
+
+
+/* ================================
+   LOWER GRID
+================================ */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+}
+
+.dashboard-card-large {
+    padding: 24px;
+    background: white;
+    border: 1px solid #e3e9e6;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(25, 45, 36, 0.04);
+}
+
+
+/* ================================
+   SECTION HEADINGS
+================================ */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.section-heading span {
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    font-weight: 700;
+    color: #789087;
+}
+
+.section-heading h2 {
+    margin: 5px 0 0;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+}
+
+.section-heading button {
+    border: none;
+    background: #f1f5f3;
+    color: #496058;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* ================================
+   TRANSACTIONS
+================================ */
+
+.transaction {
+    display: grid;
+    grid-template-columns: 40px 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 0;
+    border-top: 1px solid #edf1ef;
+}
+
+.transaction-circle {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.income-circle {
+    background: #e8f6ed;
+    color: #298052;
+}
+
+.expense-circle {
+    background: #fceceb;
+    color: #bd5b55;
+}
+
+.transaction-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.transaction-info strong {
+    font-size: 13px;
+}
+
+.transaction-info span {
+    font-size: 11px;
+    color: #8a9690;
+}
+
+.transaction-date {
+    color: #929c97;
+    font-size: 11px;
+    margin-right: 8px;
+}
+
+.transaction-income {
+    color: #268253;
+    font-size: 13px;
+}
+
+.transaction-expense {
+    color: #c35e58;
+    font-size: 13px;
+}
+
+
+/* ================================
+   SPENDING
+================================ */
+
+.spending-item {
+    padding: 13px 0;
+    border-top: 1px solid #edf1ef;
+}
+
+.spending-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.spending-heading span {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.spending-heading strong {
+    font-size: 12px;
+}
+
+.progress {
+    height: 6px;
+    background: #edf1ef;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4c806a;
+    border-radius: 20px;
+}
+
+.spending-item small {
+    display: block;
+    margin-top: 6px;
+    color: #8b9691;
+    font-size: 10px;
+}
+
+
+/* ================================
+   INSIGHT
+================================ */
+
+.dashboard-insight {
+    margin-top: 18px;
+    padding: 21px 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    background: #eef5f1;
+    border: 1px solid #dce9e2;
+    border-radius: 14px;
+}
+
+.insight-symbol {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+    background: #dcebe3;
+    color: #286047;
+    font-size: 19px;
+}
+
+.dashboard-insight > div:nth-child(2) {
+    flex: 1;
+}
+
+.dashboard-insight span {
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #668075;
+}
+
+.dashboard-insight h2 {
+    margin: 5px 0 3px;
+    font-size: 16px;
+}
+
+.dashboard-insight p {
+    margin: 0;
+    color: #73827b;
+    font-size: 12px;
+}
+
+.insight-value {
+    text-align: right;
+}
+
+.insight-value strong {
+    display: block;
+    margin-top: 4px;
+    color: #285f48;
+    font-size: 18px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+
+    .dashboard-main {
+        padding: 25px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .dashboard-main {
+        padding: 20px;
+    }
+
+    .dashboard-welcome {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .balance-section {
+        padding: 23px;
+    }
+
+    .balance-section h2 {
+        font-size: 28px;
+    }
+
+    .dashboard-card-large {
+        padding: 18px;
+    }
+
+    .transaction {
+        grid-template-columns: 36px 1fr auto;
+    }
+
+    .transaction-date {
+        display: none;
+    }
+
+    .dashboard-insight {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .insight-value {
+        width: 100%;
+        text-align: left;
+        padding-left: 58px;
+    }
+}
