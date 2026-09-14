@@ -1,0 +1,129 @@
+.tx-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.tx-toolbar input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.filter-btn.active {
+  background: #212529;
+  color: white;
+  border-color: #212529;
+}
+
+.tx-list-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.tx-list-row:last-child {
+  border-bottom: none;
+}
+
+.tx-info .tx-desc {
+  font-size: 12px;
+  color: #888;
+}
+
+.tx-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.type-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: #e6f4ec;
+  color: #2e7d5b;
+}
+
+.type-badge.expense {
+  background: #fbe7e9;
+  color: #dc3545;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  color: #dc3545;
+}
+
+/* --- Add transaction modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 350px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
