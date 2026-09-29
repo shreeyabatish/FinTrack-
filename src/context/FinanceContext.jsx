@@ -275,6 +275,15 @@ export function FinanceProvider({ children }) {
 
     }, [budgets, spentByCategory]);
 
+ const updateBudget = (id, updatedBudget) => {
+  setBudgets((current) =>
+    current.map((b) =>
+      b.id === id ? { ...b, ...updatedBudget, amount: Number(updatedBudget.amount) } : b
+    )
+  );
+};
+
+
 
     /* =========================
        GOALS
@@ -341,6 +350,7 @@ export function FinanceProvider({ children }) {
         );
 
     };
+  
 
 
     /* =========================
@@ -348,32 +358,22 @@ export function FinanceProvider({ children }) {
     ========================= */
 
     return (
-        <FinanceContext.Provider
-            value={{
+       <FinanceContext.Provider
+  value={{
+    /* Budgets */
+    budgets,
+    budgetData,
+    addBudget,
+    updateBudget,   // ✅ added here
+    deleteBudget,
+    /* Goals */
+    goals,
+    addGoal,
+    deleteGoal,
+    updateGoal,
+  }}
+>
 
-                /* Transactions */
-                transactions,
-                addTransaction,
-                deleteTransaction,
-
-                /* Financial totals */
-                totals,
-                spentByCategory,
-
-                /* Budgets */
-                budgets,
-                budgetData,
-                addBudget,
-                deleteBudget,
-
-                /* Goals */
-                goals,
-                addGoal,
-                deleteGoal,
-                updateGoal,
-
-            }}
-        >
             {children}
         </FinanceContext.Provider>
     );
