@@ -8,7 +8,7 @@ function Sidebar() {
 
             <div className="sidebar-logo">
                 <div className="logo-icon">F</div>
-                <h2>FinStack</h2>
+                <h2>FinTrack</h2>
             </div>
 
             <nav className="sidebar-nav">
