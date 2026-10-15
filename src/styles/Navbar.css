@@ -1,7 +1,11 @@
+/* ================================
+   NAVBAR (Dark Theme)
+================================ */
+
 .navbar {
   height: 70px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  background: #2a2f4f; /* dark panel */
+  border-bottom: 1px solid #3b3f5c;
 
   display: flex;
   align-items: center;
@@ -9,13 +13,14 @@
 
   padding: 0 32px;
   box-sizing: border-box;
+  color: #f5f7fa;
 }
 
 .navbar-left h2 {
   margin: 0;
   font-size: 24px;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff;
 }
 
 .navbar-right {
@@ -30,6 +35,11 @@
   font-size: 20px;
   cursor: pointer;
   padding: 8px;
+  color: #f5f7fa;
+  transition: 0.2s ease;
+}
+.notification-btn:hover {
+  color: #72c59b; /* mint green highlight */
 }
 
 .profile {
@@ -47,8 +57,8 @@
   align-items: center;
   justify-content: center;
 
-  background: #2563eb;
-  color: white;
+  background: #72c59b; /* mint green */
+  color: #1e1b2e;       /* dark text for contrast */
 
   font-size: 16px;
   font-weight: 600;
@@ -63,10 +73,10 @@
 .profile-name {
   font-size: 14px;
   font-weight: 600;
-  color: #111827;
+  color: #ffffff;
 }
 
 .profile-role {
   font-size: 12px;
-  color: #6b7280;
+  color: #b0b6c1;
 }
