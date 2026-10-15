@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h2>FinStack</h2>
+        <h2>FinTrack</h2>
       </div>
 
       <div className="navbar-right">
