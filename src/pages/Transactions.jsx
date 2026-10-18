@@ -41,33 +41,30 @@ function Transactions() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault();
+  e.preventDefault();
 
-        if (
-            !formData.title ||
-            !formData.category ||
-            !formData.amount ||
-            !formData.date
-        ) {
-            alert("Please fill all fields.");
-            return;
-        }
+  if (!formData.title || !formData.category || !formData.amount || !formData.date) {
+    alert("Please fill all fields.");
+    return;
+  }
 
-        addTransaction({
-            ...formData,
-            amount: Number(formData.amount),
-        });
+  addTransaction({
+    ...formData,
+    email: user.email,           // ✅ include user email for rewards
+    amount: Number(formData.amount),
+  });
 
-        setFormData({
-            title: "",
-            category: "",
-            amount: "",
-            type: "expense",
-            date: "",
-        });
+  setFormData({
+    title: "",
+    category: "",
+    amount: "",
+    type: "expense",
+    date: "",
+  });
 
-        setShowForm(false);
-    }
+  setShowForm(false);
+}
+
 
     function handleDelete(id) {
         if (window.confirm("Delete this transaction?")) {

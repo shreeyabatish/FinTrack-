@@ -21,9 +21,12 @@ export default function TransactionDetail() {
   }
 
   function handleDelete() {
-    deleteTransaction(tx.id)
-    navigate('/transactions')
+  if (window.confirm("Delete this transaction?")) {
+    deleteTransaction(tx.id);
+    navigate("/transactions");
   }
+}
+
 
   return (
     <div>

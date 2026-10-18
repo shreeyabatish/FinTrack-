@@ -1,100 +1,123 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from "react";
+import React, { createContext, useContext, useState, useMemo } from "react";
+import * as api from "../services/api";   // ✅ central API service
 
 const FinanceContext = createContext();
 
-const initialTransactions = [
-  { id: 1, title: "Salary", category: "Income", amount: 50000, type: "income", date: "2026-09-01" },
-  { id: 2, title: "Rent", category: "Housing", amount: 15000, type: "expense", date: "2026-09-02" },
-  { id: 3, title: "Groceries", category: "Food", amount: 4500, type: "expense", date: "2026-09-05" },
-  { id: 4, title: "Freelance", category: "Income", amount: 12000, type: "income", date: "2026-09-08" },
-  { id: 5, title: "Shopping", category: "Shopping", amount: 2500, type: "expense", date: "2026-09-10" },
-];
-
-const initialBudgets = [
-  { id: 1, category: "Food", amount: 5000 },
-  { id: 2, category: "Travel", amount: 3000 },
-  { id: 3, category: "Shopping", amount: 3000 },
-];
-
-const initialGoals = [
-  { id: 1, name: "Emergency Fund", target: 50000, saved: 25000 },
-  { id: 2, name: "Vacation Fund", target: 20000, saved: 10000 },
-];
-
 export function FinanceProvider({ children }) {
-  /* Transactions */
-  const [transactions, setTransactions] = useState(() => {
-    const saved = localStorage.getItem("fintrack_transactions");
-    return saved ? JSON.parse(saved) : initialTransactions;
-  });
+  /* =========================
+     STATE
+  ========================= */
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem("fintrack_transactions", JSON.stringify(transactions));
-  }, [transactions]);
+  const [transactions, setTransactions] = useState([]);
+  const [goals, setGoals] = useState([]);
+  const [budgets, setBudgets] = useState([]); // still local for now
+  const [rewards, setRewards] = useState({ points: 0, xp: 0, level: 1 });
 
-  const addTransaction = (transaction) => {
-    setTransactions((current) => [
-      ...current,
-      { ...transaction, id: Date.now(), amount: Number(transaction.amount) },
-    ]);
-  };
-
-  const deleteTransaction = (id) => {
-    setTransactions((current) => current.filter((t) => t.id !== id));
-  };
-
-  /* Totals */
+  /* =========================
+     DERIVED TOTALS
+  ========================= */
   const totals = useMemo(() => {
-    const income = transactions.filter((t) => t.type === "income")
+    const income = transactions
+      .filter((t) => t.type === "income")
       .reduce((sum, t) => sum + Number(t.amount), 0);
-    const expense = transactions.filter((t) => t.type === "expense")
+
+    const expense = transactions
+      .filter((t) => t.type === "expense")
       .reduce((sum, t) => sum + Number(t.amount), 0);
+
     return { income, expense, balance: income - expense };
   }, [transactions]);
 
-  /* Spending by category */
   const spentByCategory = useMemo(() => {
-    const result = {};
-    transactions.filter((t) => t.type === "expense").forEach((t) => {
-      if (!result[t.category]) result[t.category] = 0;
-      result[t.category] += Number(t.amount);
-    });
-    return result;
+    const categoryTotals = {};
+    transactions
+      .filter((t) => t.type === "expense")
+      .forEach((t) => {
+        categoryTotals[t.category] = (categoryTotals[t.category] || 0) + Number(t.amount);
+      });
+    return categoryTotals;
   }, [transactions]);
 
-  /* Budgets */
-  const [budgets, setBudgets] = useState(() => {
-    const saved = localStorage.getItem("fintrack_budgets");
-    if (!saved) return initialBudgets;
-    try {
-      const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed)) return parsed;
-      if (Array.isArray(parsed.budgets)) return parsed.budgets;
-      return initialBudgets;
-    } catch {
-      return initialBudgets;
-    }
-  });
+  /* =========================
+     AUTH
+  ========================= */
+  const signupUser = async (formData) => {
+    await api.signup(formData);
+  };
 
-  useEffect(() => {
-    localStorage.setItem("fintrack_budgets", JSON.stringify(budgets));
-  }, [budgets]);
+  const loginUser = async (formData) => {
+    const { data } = await api.login(formData);
+    setToken(data.token);
+    setUser({ email: formData.email });
+    fetchRewards(formData.email);
+  };
 
+  /* =========================
+     REWARDS
+  ========================= */
+  const fetchRewards = async (email) => {
+    const { data } = await api.getRewards(email);
+    setRewards(data);
+  };
+
+  /* =========================
+     TRANSACTIONS
+  ========================= */
+  const fetchTransactions = async () => {
+    const { data } = await api.getTransactions();
+    setTransactions(data);
+  };
+
+  const addTransaction = async (transactionData) => {
+    await api.addTransaction(transactionData);
+    fetchTransactions();
+    fetchRewards(transactionData.email);
+  };
+
+  const updateTransaction = async (transactionData) => {
+    await api.updateTransaction(transactionData);
+    fetchTransactions();
+  };
+
+  const deleteTransaction = async (id) => {
+    await api.deleteTransaction(id);
+    fetchTransactions();
+  };
+
+  /* =========================
+     GOALS
+  ========================= */
+  const fetchGoals = async () => {
+    const { data } = await api.getGoals();
+    setGoals(data);
+  };
+
+  const addGoal = async (goalData) => {
+    await api.addGoal(goalData);
+    fetchGoals();
+    fetchRewards(goalData.email);
+  };
+
+  const updateGoal = async (goalData) => {
+    await api.updateGoal(goalData);
+    fetchGoals();
+  };
+
+  // deleteGoal can be added once you implement backend route
+  const deleteGoal = (id) => {
+    setGoals(goals.filter((g) => g.id !== id));
+  };
+
+  /* =========================
+     BUDGETS (local only for now)
+  ========================= */
   const addBudget = (budget) => {
     setBudgets((current) => [
       ...current,
       { ...budget, id: Date.now(), amount: Number(budget.amount) },
     ]);
-  };
-
-  const deleteBudget = (id) => {
-    setBudgets((current) => current.filter((b) => b.id !== id));
   };
 
   const updateBudget = (id, updatedBudget) => {
@@ -105,59 +128,23 @@ export function FinanceProvider({ children }) {
     );
   };
 
-  const budgetData = useMemo(() => {
-    return budgets.map((budget) => {
-      const spent = spentByCategory[budget.category] || 0;
-      const percentage = budget.amount > 0 ? Math.round((spent / budget.amount) * 100) : 0;
-      return { ...budget, spent, percentage, remaining: budget.amount - spent };
-    });
-  }, [budgets, spentByCategory]);
-
-  /* Goals */
-  const [goals, setGoals] = useState(() => {
-    const saved = localStorage.getItem("fintrack_goals");
-    return saved ? JSON.parse(saved) : initialGoals;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("fintrack_goals", JSON.stringify(goals));
-  }, [goals]);
-
-  const addGoal = (goal) => {
-    setGoals((current) => [
-      ...current,
-      { ...goal, id: Date.now(), target: Number(goal.target), saved: Number(goal.saved || 0) },
-    ]);
+  const deleteBudget = (id) => {
+    setBudgets((current) => current.filter((b) => b.id !== id));
   };
 
-  const deleteGoal = (id) => {
-    setGoals((current) => current.filter((g) => g.id !== id));
-  };
-
-  const updateGoal = (id, saved) => {
-    setGoals((current) =>
-      current.map((g) => (g.id === id ? { ...g, saved: Number(saved) } : g))
-    );
-  };
-
-  /* Final Context */
+  /* =========================
+     PROVIDER
+  ========================= */
   return (
     <FinanceContext.Provider
       value={{
-        transactions,
-        addTransaction,
-        deleteTransaction,
-        totals,
-        spentByCategory,
-        budgets,
-        budgetData,
-        addBudget,
-        updateBudget,
-        deleteBudget,
-        goals,
-        addGoal,
-        deleteGoal,
-        updateGoal,
+        user, token,
+        signupUser, loginUser,
+        rewards, fetchRewards,
+        transactions, fetchTransactions, addTransaction, updateTransaction, deleteTransaction,
+        totals, spentByCategory,   // ✅ expose derived values
+        goals, fetchGoals, addGoal, updateGoal, deleteGoal,
+        budgets, addBudget, updateBudget, deleteBudget,
       }}
     >
       {children}
