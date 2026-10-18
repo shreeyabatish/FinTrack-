@@ -65,50 +65,55 @@ export function FinanceProvider({ children }) {
   /* =========================
      TRANSACTIONS
   ========================= */
-  const fetchTransactions = async () => {
-    const { data } = await api.getTransactions();
-    setTransactions(data);
-  };
+  /* =========================
+   TRANSACTIONS (local only for now)
+========================= */
+const addTransaction = (transaction) => {
+  setTransactions((current) => [
+    ...current,
+    { ...transaction, id: Date.now(), amount: Number(transaction.amount) }
+  ]);
+};
 
-  const addTransaction = async (transactionData) => {
-    await api.addTransaction(transactionData);
-    fetchTransactions();
-    fetchRewards(transactionData.email);
-  };
+const updateTransaction = (updatedTransaction) => {
+  setTransactions((current) =>
+    current.map((t) =>
+      t.id === updatedTransaction.id ? { ...t, ...updatedTransaction } : t
+    )
+  );
+};
 
-  const updateTransaction = async (transactionData) => {
-    await api.updateTransaction(transactionData);
-    fetchTransactions();
-  };
+const deleteTransaction = (id) => {
+  setTransactions((current) => current.filter((t) => t.id !== id));
+};
 
-  const deleteTransaction = async (id) => {
-    await api.deleteTransaction(id);
-    fetchTransactions();
-  };
 
   /* =========================
      GOALS
   ========================= */
-  const fetchGoals = async () => {
-    const { data } = await api.getGoals();
-    setGoals(data);
-  };
+ const fetchGoals = () => {
+  // For local goals, just return current state
+  return goals;
+};
 
-  const addGoal = async (goalData) => {
-    await api.addGoal(goalData);
-    fetchGoals();
-    fetchRewards(goalData.email);
-  };
+const addGoal = (goal) => {
+  setGoals((current) => [
+    ...current,
+    { ...goal, id: Date.now() }
+  ]);
+};
 
-  const updateGoal = async (goalData) => {
-    await api.updateGoal(goalData);
-    fetchGoals();
-  };
+const updateGoal = (updatedGoal) => {
+  setGoals((current) =>
+    current.map((g) =>
+      g.id === updatedGoal.id ? { ...g, ...updatedGoal } : g
+    )
+  );
+};
 
-  // deleteGoal can be added once you implement backend route
-  const deleteGoal = (id) => {
-    setGoals(goals.filter((g) => g.id !== id));
-  };
+const deleteGoal = (id) => {
+  setGoals((current) => current.filter((g) => g.id !== id));
+};
 
   /* =========================
      BUDGETS (local only for now)
@@ -137,15 +142,16 @@ export function FinanceProvider({ children }) {
   ========================= */
   return (
     <FinanceContext.Provider
-      value={{
-        user, token,
-        signupUser, loginUser,
-        rewards, fetchRewards,
-        transactions, fetchTransactions, addTransaction, updateTransaction, deleteTransaction,
-        totals, spentByCategory,   // ✅ expose derived values
-        goals, fetchGoals, addGoal, updateGoal, deleteGoal,
-        budgets, addBudget, updateBudget, deleteBudget,
-      }}
+     value={{
+  user, token,
+  signupUser, loginUser,
+  rewards, fetchRewards,
+  transactions, addTransaction, updateTransaction, deleteTransaction,
+  totals, spentByCategory,
+  goals, addGoal, updateGoal, deleteGoal,
+  budgets, addBudget, updateBudget, deleteBudget,
+}}
+
     >
       {children}
     </FinanceContext.Provider>

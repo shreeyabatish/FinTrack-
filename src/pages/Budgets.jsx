@@ -2,9 +2,10 @@ import { useState } from "react";
 import BudgetCard from "../components/BudgetCard";
 import { useFinance } from "../context/FinanceContext.jsx";
 import "../styles/Budgets.css";
+import "../styles/Modal.css";
 
 function Budgets() {
-  const { budgetData, addBudget, updateBudget, deleteBudget } = useFinance();
+  const { budgets, addBudget, updateBudget, deleteBudget } = useFinance();
 
   const [showModal, setShowModal] = useState(false);
   const [category, setCategory] = useState("");
@@ -12,7 +13,7 @@ function Budgets() {
   const [editId, setEditId] = useState(null);
   const [error, setError] = useState("");
 
-  const safeBudgetData = Array.isArray(budgetData) ? budgetData : [];
+  const safeBudgetData = Array.isArray(budgets) ? budgets : [];
 
   const totalBudget = safeBudgetData.reduce((sum, b) => sum + Number(b.amount || 0), 0);
   const totalSpent = safeBudgetData.reduce((sum, b) => sum + Number(b.spent || 0), 0);
@@ -32,7 +33,6 @@ function Budgets() {
       setError("Please enter a valid budget amount.");
       return;
     }
-    // Prevent duplicate categories
     const duplicate = safeBudgetData.find(
       (b) => b.category.toLowerCase() === cleanCategory.toLowerCase() && b.id !== editId
     );
@@ -155,8 +155,8 @@ function Budgets() {
 
       {/* MODAL */}
       {showModal && (
-        <div className="budget-modal-overlay" onClick={closeModal}>
-          <div className="budget-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div>
                 <p className="page-label">BUDGET PLANNER</p>
@@ -194,7 +194,7 @@ function Budgets() {
                 <button type="button" className="cancel-btn" onClick={closeModal}>
                   Cancel
                 </button>
-                <button type="submit" className="save-budget-btn">
+                <button type="submit" className="save-btn">
                   {editId ? "Update Budget" : "Save Budget"}
                 </button>
               </div>

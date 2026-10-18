@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFinance } from "../context/FinanceContext";
 import GoalCard from "../components/GoalCard";
 import "../styles/Goals.css";
+import "../styles/Modal.css";
 
 function Goals() {
   const { goals, addGoal, deleteGoal, updateGoal } = useFinance();
@@ -152,8 +153,8 @@ function Goals() {
 
       {/* Add Goal Modal */}
       {showModal && (
-        <div className="goal-modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="goal-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div>
                 <p className="page-label">GOAL PLANNER</p>
@@ -205,7 +206,7 @@ function Goals() {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="save-goal-btn">
+                <button type="submit" className="save-btn">
                   Create Goal
                 </button>
               </div>
