@@ -12,7 +12,7 @@
 }
 
 .chart-box {
-  background: white;
+  background: rgb(236, 229, 229);
   border-radius: 8px;
   padding: 18px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -21,11 +21,12 @@
 .chart-box h3 {
   margin: 0 0 12px 0;
   font-size: 15px;
+  color:#0f0404;
 }
 
 .insights-list {
   padding-left: 18px;
   font-size: 14px;
-  color: #444;
+  color: #0f0404;
   line-height: 1.8;
 }

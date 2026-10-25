@@ -17,7 +17,7 @@ body,
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(135deg, #1e1b2e, #2a2f4f); /* dark gradient applied globally */
-  color: #f5f7fa; /* light text for readability */
+  color: #eceef0; /* light text for readability */
   overflow-x: hidden;
 }
 
