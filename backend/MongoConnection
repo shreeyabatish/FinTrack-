@@ -1,0 +1,26 @@
+#connect to mongoDB
+mongosh
+
+#list your databases
+show dbs
+
+#open Fintrack database
+use fintrack
+
+#view collections 
+show collections
+
+#check records 
+1. db.users.find().pretty()
+2. db.transactions.find().pretty()
+3. db.goals.find().pretty()
+4. db.budgets.find().pretty()
+
+#count records
+1. db.users.countDocuments()
+2. db.transactions.countDocuments()
+3. db.goals.countDocuments()
+4. db.budgets.countDocuments()
+
+#exit
+exit
